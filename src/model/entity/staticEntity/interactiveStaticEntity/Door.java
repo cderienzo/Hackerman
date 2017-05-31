@@ -28,7 +28,9 @@ public class Door extends InteractiveStaticEntity{
     }
 
     public void interact() {
-        passed = true;
+        if(isOpen) {
+            passed = true;
+        }
     }
 
 

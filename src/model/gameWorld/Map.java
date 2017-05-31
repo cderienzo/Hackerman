@@ -1,9 +1,7 @@
 package model.gameWorld;
 
-import model.entity.dynamicEntity.DynamicEntity;
-import model.entity.dynamicEntity.character.PlayerCharacter;
-import model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
-import model.entity.staticEntity.StaticEntity;
+import model.Managers.EntityManager;
+import model.entity.Entity;
 
 import java.util.List;
 
@@ -12,22 +10,26 @@ import java.util.List;
  */
 public class Map {
 
-
     public static final int HEIGHT = 640;
     public static final int WIDTH = (HEIGHT * 3) / 4;
     public static int CELL_SIZE = 32;
 
     private Grid grid;
 
-    private PlayerCharacter player;
-    private List<EnemyCharacter> enemyes;
+    private EntityManager entityManager;
 
-    public Map(PlayerCharacter player, List<StaticEntity> staticEntities, List<DynamicEntity>) {
-        this.player = player;
-        this.enemyes = enemyes;
+    public Map(EntityManager entityManager) {
         grid = new Grid();
+        List<Entity> entities = entityManager.getEntities();
+        grid.add(entities);                                     //puede tirar OccupedCellException
     }
 
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
+    public Grid getGrid() {
+        return grid;
+    }
 
 }

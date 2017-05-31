@@ -18,7 +18,5 @@ public abstract class Character extends DynamicEntity {
         return !PASSABLE;
     }
 
-
-
-
+    public abstract void tick();
 }

@@ -7,8 +7,6 @@ import model.entity.Direction;
  */
 public class ComputerTimer {
 
-    private static final long serialVersionUID = 1L;
-
     // Cooldown times for characters
     private static final long HACKING_BASE = 10; // in ms
 
@@ -21,7 +19,6 @@ public class ComputerTimer {
     public ComputerTimer() {
         lastHackTime = 0;
     }
-
 
     public long getLastHackTime() {
         return lastHackTime;
@@ -38,4 +35,5 @@ public class ComputerTimer {
     public boolean hackTimePassed(long nowTime) {
         return (nowTime - this.getLastHackTime() >= HACKING_BASE);
     }
+
 }

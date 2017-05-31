@@ -45,7 +45,7 @@ public abstract class DynamicEntity extends Entity {
         this.velocity = velocity;
     }
 
-    public void rotate(Direction direction) {
+    private void rotate(Direction direction) {
         super.setDirection(direction);
     }
 
@@ -74,7 +74,7 @@ public abstract class DynamicEntity extends Entity {
         grid.freePosition(this.getPosition());
     }
 
-    public void move() {
+    protected void move() {
         if (movesRemaining == 0) {
             updateStatus();
             return;
@@ -92,10 +92,9 @@ public abstract class DynamicEntity extends Entity {
         }
     }
 
-    public void updateStatus() {
+    protected void updateStatus() {
         if (state == MOVING && movesRemaining <= 0)
             state = IDLE;
     }
-
 
 }

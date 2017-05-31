@@ -3,6 +3,8 @@ package model.gameWorld;
 import model.entity.Entity;
 import model.entity.Position;
 
+import java.util.Collection;
+
 /**
  * Created by franciscosanguineti on 31/5/17.
  */
@@ -24,6 +26,13 @@ public class Grid {
 
         matrix[i][j].add(entity);               //puede tirar exception
     }
+
+    public void add(Collection<? extends Entity> entities) throws OccupiedCellException {       //chequear el comodin
+        for(Entity entity: entities) {
+            add(entity);
+        }
+    }
+
 
     public Cell getCell(Position position) {
         int i = position.getY() / Map.CELL_SIZE;

@@ -3,6 +3,7 @@ package model.entity.dynamicEntity.character;
 import model.entity.Direction;
 import model.entity.Position;
 import model.entity.staticEntity.interactiveStaticEntity.Computer;
+import model.entity.staticEntity.interactiveStaticEntity.Door;
 import model.entity.staticEntity.interactiveStaticEntity.InteractiveStaticEntity;
 
 /**
@@ -30,9 +31,16 @@ public class PlayerCharacter extends Character {
         lives--;
     }
 
-    public void hack(Computer computer) {
-        computer.interact();
-
+    public void tick() {
+        move();
+        updateStatus();
     }
 
+    public void hack(Computer computer) {
+        computer.interact();
+    }
+
+    public void openDoor(Door door) {
+        door.interact();
+    }
 }
