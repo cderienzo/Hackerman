@@ -7,7 +7,7 @@ import model.entity.Entity;
  */
 public class Cell {
 
-    private static final boolean OCCUPIED = true;
+    private static final boolean EMPTY = true;
 
     private Entity entity;
 
@@ -15,33 +15,36 @@ public class Cell {
 
     public Cell() {
         entity = null;
-        state = !OCCUPIED;
+        state = EMPTY;
     }
 
     public Cell(Entity entity) {
         this.entity = entity;
-        state = OCCUPIED;
+        state = EMPTY;
     }
 
     public Entity getEntity() {
         return entity;
     }
 
-    public void removeEntity() {
+    public void free() {
         entity = null;
-        state = !OCCUPIED;
+        state = EMPTY;
     }
 
-    public static boolean isOccupied() {
-        return OCCUPIED;
+    public boolean isEmpty() {
+        return state;
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-       if(this.isOccupied()) {
+       if(!this.isEmpty()) {
            throw new OccupiedCellException();
        }
+       if(entity == null) {
+           return;
+       }
        this.entity = entity;
-       state = OCCUPIED;
+       state = !EMPTY;
     }
 
 
