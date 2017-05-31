@@ -30,7 +30,7 @@ public enum Direction implements Serializable {
 
     private static final int[][] dir = {{0,-1}, {1,-1}, {1,0}, {1,1}, {0,1}, {-1,1}, {-1,0}, {-1,-1}};
 
-    protected int code;
+    private int code;
 
     Direction(int code) {
         this.code = code;
@@ -54,7 +54,7 @@ public enum Direction implements Serializable {
     }
 
     public boolean isDiagonal(){
-
+        return (code % 2) == 1;
     }
 
     public static Direction directionBetween(Position p1, Position p2) {
