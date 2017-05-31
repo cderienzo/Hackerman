@@ -12,29 +12,24 @@ public class Position implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //capaz en int
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
 
-    public Position(double x, double y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position(Position otherPosition) {
-        this.x = otherPosition.getX();
-        this.y = otherPosition.getY();
-    }
-
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
-    public void incrementPosition(double x , double y) {
+    public void incrementPosition(int x , int y) {
         this.x += x;
         this.y += y;
     }
@@ -43,19 +38,19 @@ public class Position implements Serializable {
         return directionBetween(this,position);
     }
 
-    public double distanceXOf(Position position) {
+    public int distanceXOf(Position position) {
         return Math.abs(position.getX() - x);
     }
 
-    public double distanceYOf(Position position) {
+    public int distanceYOf(Position position) {
         return Math.abs(position.getY() - y);
     }
 
-    public double distanceOf(Position position) {
-        return Math.sqrt(Math.pow(distanceXOf(position),2) + Math.pow(distanceYOf(position),2));
+    public int distanceOf(Position position) {
+        return (int) Math.sqrt(Math.pow(distanceXOf(position),2) + Math.pow(distanceYOf(position),2));
     }
 
-    public boolean isNearby(Position position, double delta) {
+    public boolean isNearby(Position position, int delta) {
         return distanceOf(position) <= delta;
     }
 

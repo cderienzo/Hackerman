@@ -64,6 +64,7 @@ public class Timer implements Serializable {
 
     /**
      * Compares movement time elapsed with the default cooldown or a cooldown for diagonal direcction
+     * A cooldown for diagonal direction is 14 / 10 times bigger than default cooldown
      * @param nowTime time to compare
      * @return true if elapsed time overpass the cooldown. false otherwise.
      */

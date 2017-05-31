@@ -3,6 +3,8 @@ package model.entity.dynamicEntity;
 import model.entity.Direction;
 import model.entity.Entity;
 import model.entity.Position;
+import model.gameWorld.Grid;
+import model.gameWorld.Map;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +23,7 @@ public abstract class DynamicEntity extends Entity {
     protected int state = IDLE;
 
     // Movement fields
-    protected double velocity;
+    protected int velocity;
     protected int movesRemaining;
     private Timer timer;
 
@@ -35,11 +37,11 @@ public abstract class DynamicEntity extends Entity {
         return state;
     }
 
-    public double getVelocity() {
+    public int getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(double velocity) {
+    public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
 
@@ -63,12 +65,12 @@ public abstract class DynamicEntity extends Entity {
         // Check destination is within the borders of the map, and its a valid
         // destination.
 
-        if (!destination.withinBoundaries() || !grid.isFree(destination))
+        if (!destination.withinBoundaries() || !grid.isPossibleAdd(destination))
             return;
         state = MOVING;
         movesRemaining = Map.CELL_SIZE;
         timer.updateLastMoveTime(System.currentTimeMillis(), direction);
-        grid.occupyPosition(this, destination);
+        grid.add(this);
         grid.freePosition(this.getPosition());
     }
 
