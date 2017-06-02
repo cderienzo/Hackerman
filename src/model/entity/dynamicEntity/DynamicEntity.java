@@ -45,7 +45,7 @@ public abstract class DynamicEntity extends Entity {
         this.velocity = velocity;
     }
 
-    private void rotate(Direction direction) {
+    public void rotate(Direction direction) {
         super.setDirection(direction);
     }
 
