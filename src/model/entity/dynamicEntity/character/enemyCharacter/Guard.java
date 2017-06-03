@@ -6,14 +6,13 @@ package model.entity.dynamicEntity.character.enemyCharacter;
 public class Guard extends EnemyCharacter {
 
 
-    /**
-     * Constructs a newly allocated {@code Character} object that
-     * represents the specified {@code char} value.
-     *
-     * @param value the value to be represented by the
-     *              {@code Character} object.
-     */
-    public Guard(char value) {
-        super(value);
+   public Guard(Position position, Direction direction, int velocity) {
+        super(position,direction,velocity);
+    }
+
+    @Override
+    public void tick() {
+
     }
 }
+
