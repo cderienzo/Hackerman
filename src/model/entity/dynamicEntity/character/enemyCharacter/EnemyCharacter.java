@@ -5,7 +5,8 @@ package model.entity.dynamicEntity.character.enemyCharacter;
  */
 public abstract class EnemyCharacter extends Character {
 
-    public EnemyCharacter(char value) {
-        super(value);
+    public EnemyCharacter(Position position, Direction direction, int velocity) {
+        super(position, direction, velocity);
     }
 }
+
