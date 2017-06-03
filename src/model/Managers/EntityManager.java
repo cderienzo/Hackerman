@@ -75,5 +75,6 @@ public class EntityManager {
         entities.addAll(enemies);
         entities.addAll(computers);
         entities.addAll(obstacles);
+        return entities;
     }
 }
