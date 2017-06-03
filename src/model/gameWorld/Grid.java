@@ -1,4 +1,7 @@
-package com.mygdx.game.model;
+package model.gameWorld;
+
+import model.entity.Entity;
+import model.entity.Position;
 
 import java.util.Collection;
 import java.util.Map;
