@@ -1,9 +1,8 @@
-package model.gameWorld;
-
-import model.entity.Entity;
-import model.entity.Position;
+package com.mygdx.game.model;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by franciscosanguineti on 31/5/17.
@@ -13,16 +12,15 @@ public class Grid {
     private int rows, cols;
 
     public Grid() {
-        this.rows = Map.HEIGHT / Map.CELL_SIZE;
-        this.cols = Map.WIDTH / Map.CELL_SIZE;
+        this.rows = GameMap.getHeight() / GameMap.getCellSize();
+        this.cols = GameMap.getWidth() / GameMap.getCellSize();
         matrix = new Cell[rows][cols];
-        inicializeMatrix();
-        }
+        initializeMatrix();
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-        int i = entity.getPosition().getY() / Map.CELL_SIZE;
-        int j = entity.getPosition().getX() / Map.CELL_SIZE;
+        int i = entity.getPosition().getY() / GameMap.getCellSize();
+        int j = entity.getPosition().getX() / GameMap.getCellSize();
 
         matrix[i][j].add(entity);               //puede tirar exception
     }
@@ -35,8 +33,8 @@ public class Grid {
 
 
     public Cell getCell(Position position) {
-        int i = position.getY() / Map.CELL_SIZE;
-        int j = position.getX() / Map.CELL_SIZE;
+        int i = position.getY() / GameMap.getCellSize();
+        int j = position.getX() / GameMap.getCellSize();
         return matrix[i][j];
     }
 
@@ -45,8 +43,8 @@ public class Grid {
     }
 
     public void freePosition(Position position) {
-        int i = position.getY() / Map.CELL_SIZE;
-        int j = position.getX() / Map.CELL_SIZE;
+        int i = position.getY() / GameMap.getCellSize();
+        int j = position.getX() / GameMap.getCellSize();
         matrix[i][j].free();
     }
 
@@ -55,8 +53,8 @@ public class Grid {
     }
 
     public boolean isPossibleAdd(Position position) {
-        int i = position.getY() / Map.CELL_SIZE;
-        int j = position.getX() / Map.CELL_SIZE;
+        int i = position.getY() / GameMap.getCellSize();
+        int j = position.getX() / GameMap.getCellSize();
         return matrix[i][j].isEmpty();
     }
 
@@ -64,7 +62,7 @@ public class Grid {
         return matrix[x][y].isEmpty();
     }
 
-    private void inicializeMatrix() {
+    private void initializeMatrix() {
         for(int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = new Cell();
