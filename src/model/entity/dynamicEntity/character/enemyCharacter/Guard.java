@@ -2,6 +2,7 @@ package model.entity.dynamicEntity.character.enemyCharacter;
 
 import model.entity.Direction;
 import model.entity.Position;
+import model.gameWorld.Grid;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class Guard extends EnemyCharacter {
     private int currentPosition;
     private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las posiciones
     private static final int INVERSE_ORIENTATION = -1;
-    private int orientation;
+    private int orientation = NORMAL_ORIENTATION;
+    private Grid grid;
 
     public Guard(Position position, Direction direction, int velocity, int range) {
         super(position, direction, velocity, range);
@@ -35,7 +37,7 @@ public class Guard extends EnemyCharacter {
         instructions.add(position);
     }
 
-    public void addInstruction(Position position, int index) {
+    public void addInstruction(int index, Position position) {
         instructions.add(index, position);
     }
 
@@ -64,16 +66,16 @@ public class Guard extends EnemyCharacter {
     }
 
     private void updateCurrentPosition() {
-        if(getPosition().equals(instructions.get(currentPosition)) {
+        if(getPosition().equals(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
             currentPosition = (currentPosition + orientation) % instructions.size();
         }
     }
 
     private void updateOrientation() {
-        if(getPosition.eguals(instructions.get(0))) {               //si estoy en la primer direccion
+        if(getPosition().equals(instructions.get(0))) {               //si estoy en la primer direccion
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getPosition.eguals(instructions.get(0))) {          //si estoy en la ultima posision
+        else if(getPosition().equals(instructions.get(instructions.size()))) {          //si estoy en la ultima posision
             orientation = INVERSE_ORIENTATION;
         }
     }

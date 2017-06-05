@@ -1,3 +1,5 @@
+package model.gameWorld;
+
 import java.util.LinkedList;
 
 /**
@@ -10,24 +12,24 @@ public class Level1 {
 
     public Level1(PlayerCharacter player) {
         int[][] matrix = {
-                public enum obstacleType {FLOOR,DESK, WALL, FAKECOMPUTER};
-               //13X16
-                {WALL, WALL, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, WALL, WALL, WALL, WALL},
-                {WALL,    0,    0,    0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
-                {WALL, WALL, WALL, WALL, WALL, 0, GUARD, 0, WALL, WALL, WALL, WALL, WALL},
-                {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, DESK, WALL},
-                {WALL, 0, 0, 0, WALL, 0, 0, 0, WALL, 0, 0, 0, WALL},
-                {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
-                {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
-                {WALL, COMPUTER,DESK , 0, 0, WALL, 0, 0, 0, WALL, DESK, 0, 0, WALL},
-                {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
-                {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
-                {WALL, 0, 0, 0, WALL, 0, 0, 0, WALL, 0, 0, 0, WALL},
-                {WALL, DESK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
-                {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
-                {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
-                {WALL, 0, 0, 0, 0, 0, 0, 0, 0, PLAYER, 0, 0, WALL},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}
+        public enum obstacleType {FLOOR,DESK, WALL, FAKECOMPUTER};
+        //13X16
+        {WALL, WALL, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, WALL, WALL, WALL, WALL},
+        {WALL,    0,    0,    0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
+        {WALL, WALL, WALL, WALL, WALL, 0, GUARD, 0, WALL, WALL, WALL, WALL, WALL},
+        {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, DESK, WALL},
+        {WALL, 0, 0, 0, WALL, 0, 0, 0, WALL, 0, 0, 0, WALL},
+        {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
+        {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
+        {WALL, COMPUTER,DESK , 0, 0, WALL, 0, 0, 0, WALL, DESK, 0, 0, WALL},
+        {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
+        {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
+        {WALL, 0, 0, 0, WALL, 0, 0, 0, WALL, 0, 0, 0, WALL},
+        {WALL, DESK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
+        {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
+        {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
+        {WALL, 0, 0, 0, 0, 0, 0, 0, 0, PLAYER, 0, 0, WALL},
+        {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}
         };
         obstacleType state = obstacleType.FLOOR;
         LinkedList<Obstacle> desks = new LinkedList<Obstacle>();

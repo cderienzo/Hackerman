@@ -1,3 +1,5 @@
+package model.Managers;
+
 import java.util.LinkedList;
 import java.util.List;
 

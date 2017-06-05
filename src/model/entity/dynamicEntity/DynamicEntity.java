@@ -3,13 +3,8 @@ package model.entity.dynamicEntity;
 import model.entity.Direction;
 import model.entity.Entity;
 import model.entity.Position;
+import model.entity.dynamicEntity.character.Timer;
 import model.gameWorld.Grid;
-import model.gameWorld.Map;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 /**
  * It´s an entity that can rotate
@@ -24,17 +19,13 @@ public abstract class DynamicEntity extends Entity {
 
     // Movement fields
     protected int velocity;
-    protected int movesRemaining;
-    private Timer timer;
 
     protected DynamicEntity(Position position, Direction direction, int velocity) {
         super(position, direction);
         this.velocity = velocity;
-        timer = new Timer(velocity);
     }
-
     
-    public int getState() {
+    protected int getState() {
         return state;
     }
 
@@ -52,13 +43,8 @@ public abstract class DynamicEntity extends Entity {
 
     public abstract void tick();
 
-    public abstract void trytoMove(Direction direction, Grid grid);
+    public abstract void tryToMove(Direction direction, Grid grid);
 
-    public abstract void move();
-
-    protected void updateStatus() {
-        if (state == MOVING && movesRemaining <= 0)
-            state = IDLE;
-    }
+    protected abstract void move();
 
 }

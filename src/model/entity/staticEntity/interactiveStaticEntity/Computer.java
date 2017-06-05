@@ -2,7 +2,6 @@ package model.entity.staticEntity.interactiveStaticEntity;
 
 import model.entity.Direction;
 import model.entity.Position;
-import model.entity.dynamicEntity.Timer;
 
 /**
  *

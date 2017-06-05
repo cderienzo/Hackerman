@@ -7,9 +7,9 @@ import java.util.List;
 
 public class GameMap {
 
-    private static final int HEIGHT = 640;
-    private static final int WIDTH = (HEIGHT * 3) / 4;
-    private static int CELL_SIZE = 32;
+    public static final int HEIGHT = 640;
+    public static final int WIDTH = (HEIGHT * 3) / 4;
+    public static int CELL_SIZE = 32;
 
     private Grid grid;
 
@@ -42,6 +42,10 @@ public class GameMap {
     public static int getCellSize()
     {
         return CELL_SIZE;
+    }
+
+    public boolean playerCaught() {
+
     }
 
 }

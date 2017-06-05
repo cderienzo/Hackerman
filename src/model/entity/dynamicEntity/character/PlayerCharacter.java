@@ -4,12 +4,11 @@ import model.entity.Direction;
 import model.entity.Position;
 import model.entity.staticEntity.interactiveStaticEntity.Computer;
 import model.entity.staticEntity.interactiveStaticEntity.Door;
-import model.entity.staticEntity.interactiveStaticEntity.InteractiveStaticEntity;
 
 /**
  *
  */
-public class PlayerCharacter extends Character {
+public class PlayerCharacter extends GameCharacter {
 
     private static final int HACKING = 2;
 
@@ -17,10 +16,10 @@ public class PlayerCharacter extends Character {
     private int lives;
     private int currentLives;
 
-    protected PlayerCharacter(Position position, Direction direction, int maxHP, int velocity) {
+    protected PlayerCharacter(Position position, Direction direction, int maxLives, int velocity) {
         super(position, direction, velocity);
-        this.lives = maxHP;
-        this.currentLives = maxHP;
+        this.lives = maxLives;
+        this.currentLives = maxLives;
     }
 
     public boolean lives(){

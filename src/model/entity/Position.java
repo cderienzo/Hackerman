@@ -1,5 +1,7 @@
 package model.entity;
 
+import model.gameWorld.GameMap;
+
 import java.io.Serializable;
 
 import static model.entity.Direction.directionBetween;
@@ -52,6 +54,10 @@ public class Position implements Serializable {
 
     public boolean isNearby(Position position, int delta) {
         return distanceOf(position) <= delta;
+    }
+
+    public boolean withinBoundaries() {
+        return !(getX() < 0 || getX() >= GameMap.WIDTH * GameMap.CELL_SIZE || getY() < 0 || getY() >= GameMap.HEIGHT * GameMap.CELL_SIZE);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class CameraGuard extends EnemyCharacter {
 
     private List<Direction> instructions;
     private int currentDirection;
+    private int orientation;
     private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las direccions
     private static final int INVERSE_ORIENTATION = -1;
 
@@ -60,16 +61,16 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     private void updateCurrentDirection() {
-        if(getPosition().equals(instructions.get(currentPosition)) {
-            currentPosition = (currentPosition + orientation) % instructions.size();
+        if(getPosition().equals(instructions.get(currentDirection))) {
+            currentDirection = (currentDirection + orientation) % instructions.size();
         }
     }
 
     private void updateOrientation() {
-        if(getPosition.eguals(instructions.get(0))) {               //si estoy en la primer direccion
+        if(getDirection().equals(instructions.get(0))) {               //si estoy en la primer direccion
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getPosition.eguals(instructions.get(0))) {          //si estoy en la ultima posision
+        else if(getDirection().equals(instructions.get(0))) {          //si estoy en la ultima posision
             orientation = INVERSE_ORIENTATION;
         }
     }
@@ -78,4 +79,4 @@ public class CameraGuard extends EnemyCharacter {
         return instructions.get(0).equals(instructions.get(instructions.size()));
     }
 }
-}
+

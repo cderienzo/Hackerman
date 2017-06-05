@@ -5,7 +5,7 @@ import model.entity.Entity;
 import model.entity.Position;
 import model.entity.dynamicEntity.character.PlayerCharacter;
 import model.gameWorld.Grid;
-import model.gameWorld.Map;
+import model.gameWorld.GameMap;
 
 /**
  * Created by franciscosanguineti on 31/5/17.
@@ -18,10 +18,11 @@ public class Light {
         this.range = range;
     }
 
+    //Devuelve true si hay colision de la luz con el hacker
     public boolean collision(Position guardPosition, Direction guardDirection, Grid grid) {
-        int[] guardDir = guardDirection.getDir();
+        int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia
 
-        Position p1 = new Position(guardPosition.getX() + guardDir[0], guardPosition.getY() + guardDir[1]);
+        Position p1 = new Position(guardPosition.getX() + guardDir[0] * GameMap.CELL_SIZE, guardPosition.getY() + guardDir[1] * GameMap.CELL_SIZE);
 
         Direction dirRight = new Direction(guardDirection.getCode() + 1);  //al sumarle uno me da la proxima direccion a la derecha
         Direction dirLeft = new Direction(guardDirection.getCode() - 1);
@@ -33,7 +34,7 @@ public class Light {
             if(detected) {
                 return true;
             }
-            p1.incrementPosition(guardDir[0] * Map.CELL_SIZE, guardDir[1] * Map.CELL_SIZE);
+            p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);
         }
         return false;
     }
@@ -49,7 +50,7 @@ public class Light {
             if(checkPosition(currentPosition, grid)) {
                 return true;
             }
-            currentPosition.incrementPosition(dir[0] * Map.CELL_SIZE, dir[1] * Map.CELL_SIZE);
+            currentPosition.incrementPosition(dir[0] * GameMap.CELL_SIZE, dir[1] * GameMap.CELL_SIZE);
         }
         return false;
     }
