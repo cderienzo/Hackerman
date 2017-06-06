@@ -16,7 +16,7 @@ public class PlayerCharacter extends GameCharacter {
     private int lives;
     private int currentLives;
 
-    protected PlayerCharacter(Position position, Direction direction, int maxLives, int velocity) {
+    public PlayerCharacter(Position position, Direction direction, int maxLives, int velocity) {
         super(position, direction, velocity);
         this.lives = maxLives;
         this.currentLives = maxLives;

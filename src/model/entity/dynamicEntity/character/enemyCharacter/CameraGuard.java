@@ -17,6 +17,7 @@ public class CameraGuard extends EnemyCharacter {
     private int orientation;
     private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las direccions
     private static final int INVERSE_ORIENTATION = -1;
+    private boolean playerCaught;
 
 
     public CameraGuard(Position position, Direction direction, int range) {
@@ -37,6 +38,10 @@ public class CameraGuard extends EnemyCharacter {
 
     public void addInstruction(Direction direction, int index) {
         instructions.add(index, direction);
+    }
+
+    public boolean hackerDetected() {
+        return playerCaught;
     }
 
     public void tick() {

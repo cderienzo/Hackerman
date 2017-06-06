@@ -1,5 +1,7 @@
 package model.gameWorld;
 
+import model.entity.staticEntity.Obstacle;
+
 import java.util.LinkedList;
 
 /**
@@ -10,11 +12,11 @@ public class Level1 {
     private final static int WIDTH = 13;
     private final static int HEIGHT = 16;
 
-    public Level1(PlayerCharacter player) {
+    public Level1() {
+
+        //13X16 MANDAR A ARCHIVO
         int[][] matrix = {
-        public enum obstacleType {FLOOR,DESK, WALL, FAKECOMPUTER};
-        //13X16
-        {WALL, WALL, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, WALL, WALL, WALL, WALL},
+        {Obstacle.obstacleType.WALL, WALL, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, WALL, WALL, WALL, WALL},
         {WALL,    0,    0,    0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
         {WALL, WALL, WALL, WALL, WALL, 0, GUARD, 0, WALL, WALL, WALL, WALL, WALL},
         {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, DESK, WALL},
@@ -29,9 +31,10 @@ public class Level1 {
         {WALL, WALL, WALL, WALL, WALL, 0, 0, 0, WALL, WALL, WALL, WALL, WALL},
         {WALL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, WALL},
         {WALL, 0, 0, 0, 0, 0, 0, 0, 0, PLAYER, 0, 0, WALL},
-        {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}
-        };
-        obstacleType state = obstacleType.FLOOR;
+        {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}};
+
+
+        Obstacle.obstacleType state = Obstacle.obstacleType.FLOOR;
         LinkedList<Obstacle> desks = new LinkedList<Obstacle>();
         LinkedList<Obstacle> walls = new LinkedList<Obstacle>();
         LinkedList<Obstacle> fakecomputers = new LinkedList<Obstacle>();

@@ -15,6 +15,8 @@ public class GameModel {
     private boolean paused = false;
     private List<Level> levels;
     private int currentLevel;
+    private int lives;
+    private static final int MAX_LIVES = 3;
 
 
     public GameModel() {
@@ -22,8 +24,8 @@ public class GameModel {
         levels.add(new Level1());
         levels.add(new Level2());
         levels.add(new Level3());
+        lives = MAX_LIVES;
         currentLevel = 0;
-        nextLevel();
     }
 
     public void nextLevel() {
@@ -37,13 +39,35 @@ public class GameModel {
     public void tick() {
         if(!paused){
             map.getEntityManager().tick();
-            if(map.playerCaught()) {
-                                        //terminar
+            if(playerCaught()) {
+                lives--;
+                if(gameOver()) {
+                    paused = true;                                //terminar
+                }
+                else {
+                    retryLevel();
+                }
             }
         }
     }
 
-    public boolean levelFinished() {
+    public boolean gameWon() {         //win
+        return (currentLevel == levels.size()) && levelFinished();//
+    }
+
+    public boolean passedLevel() {
+
+    }
+
+    public boolean gameOver() {
+        return lives == 0;
+    }
+
+    public boolean playerCaught() {
+        return map.getEntityManager().playerCaught();
+    }
+
+    public void retryLevel() {
 
     }
 

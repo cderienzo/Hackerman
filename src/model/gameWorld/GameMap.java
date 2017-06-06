@@ -45,7 +45,7 @@ public class GameMap {
     }
 
     public boolean playerCaught() {
-
+        return
     }
 
 }

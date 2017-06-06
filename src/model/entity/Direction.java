@@ -11,16 +11,16 @@ import java.util.Random;
 /**
  * Created by franciscosanguineti on 30/5/17.
  */
-public enum Direction implements Serializable {
+public class Direction implements Serializable {
 
-    UP (0),
-    UP_RIGHT (1),
-    RIGHT (2),
-    DOWN_RIGHT (3),
-    DOWN (4),
-    DOWN_LEFT (5),
-    LEFT (6),
-    UP_LEFT (7);
+    private static final int UP = 0;
+    private static final int UP_RIGHT = 1;
+    private static final int RIGHT = 2;
+    private static final int DOWN_RIGHT = 3;
+    private static final int DOWN = 4;                  //esto es nefasto
+    private static final int DOWN_LEFT = 5;
+    private static final int LEFT = 6;
+    private static final int UP_LEFT = 7;
 
     private static final long serialVersionUID = 1L;
 
@@ -32,8 +32,8 @@ public enum Direction implements Serializable {
 
     private int code;
 
-    Direction(int code) {
-        this.code = code;
+    public Direction(int code) {
+        this.code = code % 8;
     }
 
     /**
@@ -44,6 +44,11 @@ public enum Direction implements Serializable {
     public static Direction randomDirection() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
+
+    public Direction getLeft() {
+        return new Direction(code-1);
+    }
+
 
     public int getCode(){
         return code;

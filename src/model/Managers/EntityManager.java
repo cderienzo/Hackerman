@@ -36,6 +36,15 @@ public class EntityManager {
         }
     }
 
+    public boolean playerCaught() {
+        for(EnemyCharacter enemy: enemies) {
+            if(enemy.hackerDetected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public PlayerCharacter getPlayer() {
         return player;
     }

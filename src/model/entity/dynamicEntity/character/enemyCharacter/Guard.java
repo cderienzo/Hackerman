@@ -20,17 +20,20 @@ public class Guard extends EnemyCharacter {
     private static final int INVERSE_ORIENTATION = -1;
     private int orientation = NORMAL_ORIENTATION;
     private Grid grid;
+    private boolean playerCaught;
 
     public Guard(Position position, Direction direction, int velocity, int range) {
         super(position, direction, velocity, range);
         instructions = null;
         currentPosition = 0;
+        playerCaught = false;
     }
 
     public Guard(Position position, Direction direction, int velocity, int range, List<Position> instructions) {
         super(position, direction, velocity, range);
         this. instructions = instructions;
         currentPosition = 0;
+        playerCaught = false;
     }
 
     public void addInstruction(Position position) {
@@ -48,6 +51,9 @@ public class Guard extends EnemyCharacter {
         if(getState() == IDLE) {
             Direction direction = nextDirection();
             tryToMove(direction, grid);
+            if(getMylight().collision(position, direction, grid)) {
+                playerCaught = true;
+            }
         }
         move();
         updateStatus();
@@ -63,6 +69,10 @@ public class Guard extends EnemyCharacter {
         }
         return Direction.directionBetween(getPosition(), instructions.get(currentPosition));
 
+    }
+
+    public boolean hackerDetected() {
+        return playerCaught;
     }
 
     private void updateCurrentPosition() {
