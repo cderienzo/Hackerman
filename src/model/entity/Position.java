@@ -56,6 +56,10 @@ public class Position implements Serializable {
         return !(getX() < 0 || getX() >= GameMap.WIDTH * GameMap.CELL_SIZE || getY() < 0 || getY() >= GameMap.HEIGHT * GameMap.CELL_SIZE);
     }
 
+    public Position toGridIndexes() {
+        return new Position(getX() / GameMap.CELL_SIZE, getY() / GameMap.CELL_SIZE);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj==null || !getClass().equals(obj.getClass())) {

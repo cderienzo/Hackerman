@@ -48,8 +48,10 @@ public class EntityManager {
     }
 
     public void setGrid(Grid grid) {
-        for(EnemyCharacter enemie: enemies) {
-            enemie.setGrid(grid);
+        if(enemies != null) {
+            for (EnemyCharacter enemie : enemies) {
+                enemie.setGrid(grid);
+            }
         }
         player.setGrid(grid);
     }
@@ -89,10 +91,18 @@ public class EntityManager {
     public List<Entity> getEntities() {
         List<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
-        entities.add(door);
-        entities.addAll(enemies);
-        entities.addAll(computers);
-        entities.addAll(obstacles);
+        if(door != null) {
+            entities.add(door);
+        }
+        if(enemies != null) {
+            entities.addAll(enemies);
+        }
+        if(computers != null) {
+            entities.addAll(computers);
+        }
+        if(obstacles != null) {
+            entities.addAll(obstacles);
+        }
         return entities;
     }
 }

@@ -35,7 +35,10 @@ public class Direction implements Serializable {
     }
 
     public Direction getLeft() {
-        return new Direction((code - 1) % 8);
+        if(code - 1 < 0) {
+            return new Direction(7);
+        }
+        return new Direction(code - 1);
     }
 
     public int getCode(){

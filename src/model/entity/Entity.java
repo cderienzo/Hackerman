@@ -9,7 +9,7 @@ public abstract class Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    protected static final int IDLE = 0;
+    public static final int IDLE = 0;
 
     protected static final boolean PASSABLE = true;
 

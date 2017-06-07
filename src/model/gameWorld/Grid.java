@@ -20,9 +20,8 @@ public class Grid {
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-        int i = entity.getPosition().getY() / GameMap.CELL_SIZE;
-        int j = entity.getPosition().getX() / GameMap.CELL_SIZE;
-
+        int i = entity.getPosition().getX() / GameMap.CELL_SIZE;
+        int j = entity.getPosition().getY() / GameMap.CELL_SIZE;
         matrix[i][j].add(entity);               //puede tirar exception
     }
 
@@ -34,9 +33,8 @@ public class Grid {
 
 
     public Cell getCell(Position position) {
-        int i = position.getY() / GameMap.CELL_SIZE;
-        int j = position.getX() / GameMap.CELL_SIZE;
-        return matrix[i][j];
+        Position positionGrid = position.toGridIndexes();
+        return matrix[positionGrid.getX()][positionGrid.getY()];
     }
 
     public Cell getCell(int x, int y) {
@@ -44,9 +42,8 @@ public class Grid {
     }
 
     public void freePosition(Position position) {
-        int i = position.getY() / GameMap.CELL_SIZE;
-        int j = position.getX() / GameMap.CELL_SIZE;
-        matrix[i][j].free();
+        Position positionGrid = position.toGridIndexes();
+        matrix[positionGrid.getX()][positionGrid.getY()].free();
     }
 
     public Cell[][] getMatrix() {
@@ -54,9 +51,8 @@ public class Grid {
     }
 
     public boolean isPossibleAdd(Position position) {
-        int i = position.getY() / GameMap.CELL_SIZE;
-        int j = position.getX() / GameMap.CELL_SIZE;
-        return matrix[i][j].isEmpty();
+        Position positionGrid = position.toGridIndexes();
+        return matrix[positionGrid.getX()][positionGrid.getY()].isEmpty();
     }
 
     public boolean isPossibleAdd(int x, int y) {

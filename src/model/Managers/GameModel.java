@@ -29,6 +29,7 @@ public class GameModel {
         levels.add(new Level3());
         lives = MAX_LIVES;
         currentLevel = 0;
+
     }
 
     public void nextLevel() {

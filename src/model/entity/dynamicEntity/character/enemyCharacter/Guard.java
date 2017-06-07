@@ -44,15 +44,17 @@ public class Guard extends EnemyCharacter {
     }
 
     public void tick() {
+        if(getMylight().collision(position, direction, grid)) {
+            playerDetected = true;
+        }
+
         if(instructions == null) {
             return;
         }
+
         if(getState() == IDLE) {
             Direction direction = nextDirection();
             tryToMove(direction);
-            if(getMylight().collision(position, direction, grid)) {
-                playerDetected = true;
-            }
         }
         move();
         updateStatus();

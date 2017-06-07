@@ -20,9 +20,8 @@ public class CameraGuard extends EnemyCharacter {
     private int orientation;
     private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las direccions
     private static final int INVERSE_ORIENTATION = -1;
-    private boolean playerCaught;
 
-    private boolean playerCaught;
+    private boolean playerDetected;
 
     private static final int ROTATING = 2;
     private static final int TIME_ROTATING = 5000;
@@ -33,12 +32,14 @@ public class CameraGuard extends EnemyCharacter {
         super(position, direction, 0, range);
         instructions = null;
         currentDirection = 0;
+        playerDetected = false;
     }
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
         super(position, direction, 0, range);
         this. instructions = instructions;
         currentDirection = 0;
+        playerDetected = false;
     }
 
     public void addInstruction(Direction direction) {
@@ -50,10 +51,13 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     public boolean hackerDetected() {
-        return playerCaught;
+        return playerDetected;
     }
 
     public void tick() {
+        if(getMylight().collision(position, direction, grid)) {
+            playerDetected = true;
+        }
         if(instructions == null) {
             return;
         }

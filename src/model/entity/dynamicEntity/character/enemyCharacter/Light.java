@@ -25,7 +25,6 @@ public class Light {
         int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia
 
         Position p1 = new Position(guardPosition.getX() + guardDir[0] * GameMap.CELL_SIZE, guardPosition.getY() + guardDir[1] * GameMap.CELL_SIZE);
-
         Direction dirRight = guardDirection.getRight();
         Direction dirLeft = guardDirection.getLeft();
 
@@ -44,30 +43,28 @@ public class Light {
     private boolean checkDirection(Position currentPosition, Direction currentDirection, int currentRange, Grid grid) {
         int[] dir = currentDirection.getDir();
 
+        Position posCopy = new Position(currentPosition.getX(), currentPosition.getY());
+
         for (int i = 0; i < currentRange; i++) {
-            //devuelve true si encuentra al hacker
-            if(!checkPassable(currentPosition, grid)) {
+            //devuelve true si encuentra al hacker, false si se va del mapa o si encuentra un obstaculo para la linterna
+            if(!posCopy.withinBoundaries()) {
                 return false;
             }
-            if(checkPosition(currentPosition, grid)) {
+            if(checkPlayer(posCopy, grid)) {
                 return true;
             }
-            currentPosition.incrementPosition(dir[0] * GameMap.CELL_SIZE, dir[1] * GameMap.CELL_SIZE);
+            if(!grid.isPossibleAdd(posCopy)) {
+                return false;
+            }
+            posCopy.incrementPosition(dir[0] * GameMap.CELL_SIZE, dir[1] * GameMap.CELL_SIZE);
         }
         return false;
     }
 
-    private boolean checkPassable(Position position, Grid grid) {
-        if(!position.withinBoundaries() || !grid.isPossibleAdd(position)) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkPosition(Position position, Grid grid) {
+    private boolean checkPlayer(Position position, Grid grid) {
         Entity entity = grid.getCell(position).getEntity();
 
-        if(entity == null){
+        if(entity == null) {
             return false;
         }
         if(entity.getClass().equals(PlayerCharacter.class)) {
@@ -75,6 +72,4 @@ public class Light {
         }
         return false;
     }
-
-
 }
