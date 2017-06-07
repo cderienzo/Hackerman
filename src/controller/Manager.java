@@ -1,78 +1,58 @@
 package controller;
 
-import model.Managers.EntityManager;
+import com.badlogic.gdx.Gdx;
+import com.mygdx.game.view.UIManager;
 
 /**
  * Created by franciscosanguineti on 31/5/17.
  */
 public class Manager {
 
-        // Managers to control
-        private ModelManager modelManager;
-        private View view;
-        
-        private enum states {INITIALIZE, EXIT, LOAD_GAME, PAUSE, GAME_OVER, WON}
-        private enum input {
+    // Managers to control
+    private ModelManager modelManager;
+    private UIManager viewManager;
 
-        public InputManager() {
-                
-                
-                
-                
-            if goup
-            modelManager.getEntityManager().getPlayer().tryToMove();
-            checkGameOver(); //a fran no le gusta NEFASTO
-            if pause
-            state(pausa)
-            if space
-            modelManager.getEntityManager.getPlayer.interact();
-
-        }
-
-        public void checkGameOver() {
-             if (modelManager.getGameModel().gameOver()) {
-                 state(gameOver);
-             }
-        }
+    public enum STATE {INITIALIZE, EXIT, PAUSE, GAME_OVER, WON}
+    private STATE state = STATE.INITIALIZE;
 
 
-        public Manager() {
+    public Manager() {
+        modelManager = new ModelManager();
+        viewManager = new UIManager(modelManager);
+    }
 
-            modelManager = new ModelManager();
-            view = new View;
-            FileManager.createFileManager(this);
-            //view llama a initialize del model manager
-        }
-
-        public void stateManager (estado) {
-            switch (estado) {
-                            case: 
-            estado inicializar
+    public void stateManager (STATE state) {
+        switch (state) {
+            case INITIALIZE: {
                 modelManager.initialize();
-            estado exit
-                exit
-            estado cargarjuego
-                fileManager.initialize();
-            estado pausa
+            } break;
+
+            case EXIT: {
+                viewManager.getGame().setScreen(viewManager.getGame().getExitScreen());
+            } break;
+
+            case PAUSE: {
                 modelManager.getGameModel().setPause();
-                view.setState(view.pause);
-            estado gameover
-                view.setState(view.gameOver);
-            estado win
-                    if ()
+                viewManager.getGame().setScreen(viewManager.getGame().getPausedScreen());
+            }break;
 
+            case GAME_OVER: {
+                modelManager.getGameModel().setPause();
+                viewManager.getGame().setScreen(viewManager.getGame().getGameOverScreen());
+            } break;
 
-
+            case WON: {
+                viewManager.getGame().setScreen(viewManager.getGame().getWonScreen());
+                Gdx.app.exit();
+            }
         }
+    }
 
-        /**
-         * Displays win message and quits.
-         */
-        public void win() {
-            masterRenderer.displayWin();
-            System.exit(0);
+    public void checkGameOver() {
+        if (modelManager.getGameModel().gameOver()) {
+            stateManager(STATE.GAME_OVER);
         }
-
+    }
 
         /**
          * Sets the current entityManager to the one specified. This method should be
@@ -89,6 +69,5 @@ public class Manager {
             new Manager();
         }
 
-    }
-
+        }
 }
