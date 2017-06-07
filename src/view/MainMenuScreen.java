@@ -5,14 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.SnakeGame;
 
 /**
  * Created by Bianca on 28/05/2017.
  */
 public class MainMenuScreen implements Screen {
 
-    private SnakeGame game;
+    private HackerGame game;
     private Texture loadGameButtonActive;
     private Texture loadGameButtonInactive;
     private Texture playButtonActive;
@@ -35,7 +34,7 @@ public class MainMenuScreen implements Screen {
     private static final int loadY = LOAD_Y - BUTTON_HEIGHT;
     private static final int exitY = EXIT_Y - BUTTON_HEIGHT;
 
-    public MainMenuScreen(SnakeGame game) {
+    public MainMenuScreen(HackerGame game) {
 
         this.game = game;
         playButtonInactive = new Texture("core/assets/playinactive.png");
@@ -71,7 +70,7 @@ public class MainMenuScreen implements Screen {
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.createGameScreen(this.game);
-                game.setScreen(game.gameScreen);
+                game.setScreen((Screen)game.getGameScreen());
             }
         } else {
             game.batch.draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);

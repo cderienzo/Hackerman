@@ -5,14 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.SnakeGame;
 
 /**
  * Created by Bianca on 29/05/2017.
  */
 public class ExitScreen implements Screen {
 
-    private SnakeGame game;
+    private HackerGame game;
     //texture
     private Texture resumeButtonActive;
     private Texture resumeButtonInactive;
@@ -33,7 +32,7 @@ public class ExitScreen implements Screen {
     private static final int bottomY = BOTTOM_Y - BUTTON_HEIGHT;
 
 
-    public ExitScreen(SnakeGame game) {
+    public ExitScreen(HackerGame game) {
         this.game = game;
         resumeButtonActive = new Texture(Gdx.files.internal("core/assets/resumeactive.png"));
         resumeButtonInactive = new Texture(Gdx.files.internal("core/assets/resumeinactive.png"));
@@ -65,7 +64,7 @@ public class ExitScreen implements Screen {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 game.gameScreen.setState(GameScreen.STATE.PLAYING);
-                game.setScreen(game.gameScreen);
+                game.setScreen((Screen)game.getGameScreen());
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -76,7 +75,7 @@ public class ExitScreen implements Screen {
             game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 game.gameScreen.setState(GameScreen.STATE.EXIT_YES);
-                game.setScreen(game.gameScreen);
+                game.setScreen((Screen)game.getGameScreen());
             }
         } else {
             game.batch.draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);

@@ -6,14 +6,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.SnakeGame;
 
 /**
  * Created by Bianca on 29/05/2017.
  */
 public class PausedScreen implements Screen {
 
-    private SnakeGame game;
+    private HackerGame game;
     //texture
     private Texture resumeButtonActive;
     private Texture resumeButtonInactive;
@@ -29,7 +28,7 @@ public class PausedScreen implements Screen {
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int topY = TOP_Y - BUTTON_HEIGHT;
 
-    public PausedScreen(SnakeGame game){
+    public PausedScreen(HackerGame game){
 
         this.game = game;
         resumeButtonInactive = new Texture(Gdx.files.internal("core/assets/resumeinactive.png"));
@@ -60,7 +59,7 @@ public class PausedScreen implements Screen {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 game.gameScreen.setState(GameScreen.STATE.PLAYING);
-                game.setScreen(game.gameScreen);
+                game.setScreen((Screen) game.getGameScreen());
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);

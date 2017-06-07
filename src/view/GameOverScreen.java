@@ -5,14 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.SnakeGame;
 
 /**
  * Created by Bianca on 29/05/2017.
  */
 public class GameOverScreen implements Screen {
 
-    private SnakeGame game;
+    private HackerGame game;
     //texture
     private Texture gameOver;
     private Texture exitButtonActive;
@@ -28,7 +27,7 @@ public class GameOverScreen implements Screen {
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int topY = TOP_Y - BUTTON_HEIGHT;
 
-    public GameOverScreen(SnakeGame game) {
+    public GameOverScreen(HackerGame game) {
         this.game = game;
         gameOver = new Texture(Gdx.files.internal("core/assets/gameover.png"));
         exitButtonActive = new Texture(Gdx.files.internal("core/assets/exitactive.png"));
@@ -58,7 +57,7 @@ public class GameOverScreen implements Screen {
             game.batch.draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 game.gameScreen.setState(GameScreen.STATE.EXIT_YES);
-                game.setScreen(game.gameScreen);
+                game.setScreen((Screen)game.getGameScreen());
             }
         } else {
             game.batch.draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
