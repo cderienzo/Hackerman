@@ -10,8 +10,15 @@ public class Manager {
         // Managers to control
         private ModelManager modelManager;
         private View view;
+        
+        private enum states {INITIALIZE, EXIT, LOAD_GAME, PAUSE, GAME_OVER, WON}
+        private enum input {
 
         public InputManager() {
+                
+                
+                
+                
             if goup
             modelManager.getEntityManager().getPlayer().tryToMove();
             checkGameOver(); //a fran no le gusta NEFASTO
@@ -37,8 +44,9 @@ public class Manager {
             //view llama a initialize del model manager
         }
 
-        public state(estado) {
-            switch
+        public void stateManager (estado) {
+            switch (estado) {
+                            case: 
             estado inicializar
                 modelManager.initialize();
             estado exit
