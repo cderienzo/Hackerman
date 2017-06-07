@@ -19,13 +19,15 @@ public class Light {
     }
 
     //Devuelve true si hay colision de la luz con el hacker
+
     public boolean collision(Position guardPosition, Direction guardDirection, Grid grid) {
+
         int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia
 
         Position p1 = new Position(guardPosition.getX() + guardDir[0] * GameMap.CELL_SIZE, guardPosition.getY() + guardDir[1] * GameMap.CELL_SIZE);
 
-        Direction dirRight = new Direction(guardDirection.getCode() + 1);  //al sumarle uno me da la proxima direccion a la derecha
-        Direction dirLeft = new Direction(guardDirection.getCode() - 1);
+        Direction dirRight = guardDirection.getRight();
+        Direction dirLeft = guardDirection.getLeft();
 
         boolean detected = false;
 

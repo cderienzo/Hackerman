@@ -1,11 +1,13 @@
 package model.Managers;
 
 import model.entity.Entity;
+import model.entity.dynamicEntity.DynamicEntity;
 import model.entity.dynamicEntity.character.PlayerCharacter;
 import model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
 import model.entity.staticEntity.Obstacle;
 import model.entity.staticEntity.interactiveStaticEntity.Computer;
 import model.entity.staticEntity.interactiveStaticEntity.Door;
+import model.gameWorld.Grid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,22 @@ public class EntityManager {
         for(EnemyCharacter enemy: enemies) {
             enemy.tick();
         }
+    }
+
+    public boolean playerCaught() {
+        for(EnemyCharacter enemy: enemies) {
+            if(enemy.hackerDetected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setGrid(Grid grid) {
+        for(EnemyCharacter enemie: enemies) {
+            enemie.setGrid(grid);
+        }
+        player.setGrid(grid);
     }
 
     public PlayerCharacter getPlayer() {
@@ -78,3 +96,4 @@ public class EntityManager {
         return entities;
     }
 }
+

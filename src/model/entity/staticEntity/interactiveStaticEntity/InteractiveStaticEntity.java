@@ -9,7 +9,7 @@ import model.entity.staticEntity.StaticEntity;
  */
 public abstract class InteractiveStaticEntity extends StaticEntity {
 
-    public InteractiveStaticEntity(Position position, Direction direction) {
+    protected InteractiveStaticEntity(Position position, Direction direction) {
         super(position, direction);
     }
 

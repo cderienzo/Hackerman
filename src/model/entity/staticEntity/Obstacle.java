@@ -17,7 +17,6 @@ public class Obstacle extends StaticEntity {
         this.type = type.ordinal();
     }
 
-    @Override
     public boolean isPassable() {
         return !PASSABLE;
     }

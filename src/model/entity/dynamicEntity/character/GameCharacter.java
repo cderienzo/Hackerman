@@ -23,7 +23,11 @@ public abstract class GameCharacter extends DynamicEntity {
         return !PASSABLE;
     }
 
-    public void tryToMove(Direction direction, Grid grid) {
+    protected Timer getTimer() {
+        return timer;
+    }
+
+    public void tryToMove(Direction direction) {
         if (state != IDLE || direction == null)
             return;
 
@@ -34,7 +38,7 @@ public abstract class GameCharacter extends DynamicEntity {
 
         int[] dir = direction.getDir();
 
-        Position destination = new Position(getPosition().getX() + dir[0], getPosition().getY() + dir[1]);
+        Position destination = new Position(getPosition().getX() + dir[0] * GameMap.CELL_SIZE, getPosition().getY() + dir[1] * GameMap.CELL_SIZE);
 
         // Check destination is within the borders of the map, and its a valid
         // destination.

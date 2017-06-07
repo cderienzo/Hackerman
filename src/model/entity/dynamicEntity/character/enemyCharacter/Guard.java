@@ -19,18 +19,20 @@ public class Guard extends EnemyCharacter {
     private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las posiciones
     private static final int INVERSE_ORIENTATION = -1;
     private int orientation = NORMAL_ORIENTATION;
-    private Grid grid;
+    private boolean playerDetected;
 
     public Guard(Position position, Direction direction, int velocity, int range) {
         super(position, direction, velocity, range);
         instructions = null;
         currentPosition = 0;
+        playerDetected = false;
     }
 
     public Guard(Position position, Direction direction, int velocity, int range, List<Position> instructions) {
         super(position, direction, velocity, range);
         this. instructions = instructions;
         currentPosition = 0;
+        playerDetected = false;
     }
 
     public void addInstruction(Position position) {
@@ -47,10 +49,17 @@ public class Guard extends EnemyCharacter {
         }
         if(getState() == IDLE) {
             Direction direction = nextDirection();
-            tryToMove(direction, grid);
+            tryToMove(direction);
+            if(getMylight().collision(position, direction, grid)) {
+                playerDetected = true;
+            }
         }
         move();
         updateStatus();
+    }
+
+    public boolean hackerDetected() {
+        return playerDetected;
     }
 
     public Direction nextDirection() {

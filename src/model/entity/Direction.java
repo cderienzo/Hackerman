@@ -11,38 +11,31 @@ import java.util.Random;
 /**
  * Created by franciscosanguineti on 30/5/17.
  */
-public enum Direction implements Serializable {
+public class Direction implements Serializable {
 
-    UP (0),
-    UP_RIGHT (1),
-    RIGHT (2),
-    DOWN_RIGHT (3),
-    DOWN (4),
-    DOWN_LEFT (5),
-    LEFT (6),
-    UP_LEFT (7);
-
-    private static final long serialVersionUID = 1L;
-
-    private static final List<Direction> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int SIZE = VALUES.size();
-    private static final Random RANDOM = new Random();
+    public static final int UP = 0;
+    public static final int UP_RIGHT = 1;
+    public static final int RIGHT = 2;
+    public static final int DOWN_RIGHT = 3;
+    public static final int DOWN = 4;
+    public static final int DOWN_LEFT = 5;
+    public static final int LEFT = 6;
+    public static final int UP_LEFT = 7;
 
     private static final int[][] dir = {{0,-1}, {1,-1}, {1,0}, {1,1}, {0,1}, {-1,1}, {-1,0}, {-1,-1}};
 
     private int code;
 
-    Direction(int code) {
-        this.code = code;
+    public Direction(int code) {
+        this.code = code % 8;
     }
 
-    /**
-     * Returns a random direction.
-     *
-     * @return A random direction.
-     */
-    public static Direction randomDirection() {
-        return VALUES.get(RANDOM.nextInt(SIZE));
+    public Direction getRight() {
+        return new Direction((code + 1) % 8);           //al sumarle uno me da la proxima direccion a la derecha
+    }
+
+    public Direction getLeft() {
+        return new Direction((code - 1) % 8);
     }
 
     public int getCode(){
@@ -57,8 +50,30 @@ public enum Direction implements Serializable {
         return (code % 2) == 1;
     }
 
+    //retorna la direccion a tomar para llegar de la posicion p1 a la p2
+    //esto es PI
     public static Direction directionBetween(Position p1, Position p2) {
+        double[] dist = new double[8];
+        for (int i = 0; i < 7; i++) {
+            Position posAux = new Position(p1.getX() + dir[i][0], p1.getY() + dir[i][1]);
+            dist[i] = posAux.distanceOf(p2);
+        }
+        int minDist = minDouble(dist);
+        return new Direction(minDist);
+    }
 
+    //retorna cual es el indice del minimo double en la lista
+    //esto es PI
+    private static int minDouble(double[] list) {
+        int minIndex = 0;
+        double min = list[0];
+        for(int i = 0; i < list.length; i++) {
+            if(list[i] - min < 0) {
+                min = list[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
     }
 
 }

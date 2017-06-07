@@ -9,15 +9,12 @@ public abstract class Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final int IDLE = 0;
+    protected static final int IDLE = 0;
 
-    public static final boolean PASSABLE = true;
+    protected static final boolean PASSABLE = true;
 
     protected Position position;
     protected Direction direction;
-
-    //podriamos tener una forma, por ej circulo o rectangulo
-    //protected Shape shape;
 
     protected Entity(Position position, Direction direction) {
         this.position = position;
@@ -49,10 +46,7 @@ public abstract class Entity implements Serializable {
             return false;
         }
         Entity aux = (Entity) object;
-        if(this.getPosition().equals(aux.getPosition())) {
-            return true;
-        }
-        return false;
+        return this.getPosition().equals(aux.getPosition());
     }
 
 }

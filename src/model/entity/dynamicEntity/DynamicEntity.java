@@ -14,11 +14,12 @@ public abstract class DynamicEntity extends Entity {
     private static final long serialVersionUID = 1L;
 
     // State fields
-    protected static final int MOVING = 1;
     protected int state = IDLE;
+    protected static final int MOVING = 1;
 
     // Movement fields
     protected int velocity;
+    protected Grid grid;
 
     protected DynamicEntity(Position position, Direction direction, int velocity) {
         super(position, direction);
@@ -33,17 +34,21 @@ public abstract class DynamicEntity extends Entity {
         return velocity;
     }
 
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
 
-    public void rotate(Direction direction) {
+    protected void rotate(Direction direction) {
         super.setDirection(direction);
     }
 
     public abstract void tick();
 
-    public abstract void tryToMove(Direction direction, Grid grid);
+    public abstract void tryToMove(Direction direction);
 
     protected abstract void move();
 

@@ -17,9 +17,7 @@ public abstract class EnemyCharacter extends GameCharacter {
         mylight = new Light(range);
     }
 
-    public boolean hackerDetected(Grid grid) {
-        return mylight.collision(position, direction,grid);
-    }
+    public abstract boolean hackerDetected();
 
     public Light getMylight() {
             return mylight;

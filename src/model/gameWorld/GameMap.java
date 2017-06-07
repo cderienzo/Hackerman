@@ -19,6 +19,7 @@ public class GameMap {
         grid = new Grid();
         List<Entity> entities = entityManager.getEntities();
         grid.add(entities);                                     //puede tirar OccupedCellException
+        entityManager.setGrid(grid);
     }
 
     public EntityManager getEntityManager() {
@@ -27,25 +28,6 @@ public class GameMap {
 
     public Grid getGrid() {
         return grid;
-    }
-
-    public static int getHeight()
-    {
-        return HEIGHT;
-    }
-
-    public static int getWidth()
-    {
-        return WIDTH;
-    }
-
-    public static int getCellSize()
-    {
-        return CELL_SIZE;
-    }
-
-    public boolean playerCaught() {
-
     }
 
 }

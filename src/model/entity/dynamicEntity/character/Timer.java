@@ -37,19 +37,10 @@ public class Timer implements Serializable {
     }
 
     /**
-     * Gets the time necessary to wait after a movement
-     * @return the move cooldown time
-     */
-    public long getMoveCooldown() {
-        return moveCooldown;
-    }
-
-    /**
      * Sets the time for last movement
      * @param nowTime time to update the last movemnt's time
      * @param direction update the state for diagonal or not diagonal direction
      */
-
     public void updateLastMoveTime(long nowTime, Direction direction) {
         this.lastMoveTime = nowTime;
         if(direction.isDiagonal()){

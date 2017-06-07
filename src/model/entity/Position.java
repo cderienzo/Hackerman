@@ -52,10 +52,6 @@ public class Position implements Serializable {
         return (int) Math.sqrt(Math.pow(distanceXOf(position),2) + Math.pow(distanceYOf(position),2));
     }
 
-    public boolean isNearby(Position position, int delta) {
-        return distanceOf(position) <= delta;
-    }
-
     public boolean withinBoundaries() {
         return !(getX() < 0 || getX() >= GameMap.WIDTH * GameMap.CELL_SIZE || getY() < 0 || getY() >= GameMap.HEIGHT * GameMap.CELL_SIZE);
     }
