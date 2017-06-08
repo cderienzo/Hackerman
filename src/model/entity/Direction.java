@@ -86,5 +86,11 @@ public class Direction implements Serializable {
         Direction aux = (Direction) obj;
         return getCode() == aux.getCode();
     }
+    
+    @Override
+    public String toString()
+    {
+        return "Direction: [" + dir[code][0] + "," + dir[code][1] + "]";
+    }
 
 }
