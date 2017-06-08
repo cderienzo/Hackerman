@@ -35,7 +35,7 @@ public class ComputerManager {
         }
     }
 
-    public void openDoor() {
+    private void openDoor() {
         myDoor.setOpen();
     }
 

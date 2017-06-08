@@ -34,14 +34,16 @@ public class ModelManager implements Runnable{
                     manager.gameOver();
                 }
                 if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
-                    manager.passedLevel();                              //screen de next kevel
+                    gameModel.setPaused();
+                    manager.passedLevel();                              //screen de next level
                 }
-                else {
+                if (gameModel.passedLevel() && !gameModel.hasNextLevel()) {
+                    gameModel.setPaused();
                     manager.gameWon();
                 }
             }
         };
-        timer.schedule(task, 0, 5);
+        timer.schedule(task, 0, 50);
     }
 
     public GameModel getGameModel() {

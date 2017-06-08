@@ -16,8 +16,9 @@ public class GameMap {
     private EntityManager entityManager;
 
     public GameMap(EntityManager entityManager) throws OccupiedCellException{
-        grid = new Grid();
+        this.entityManager = entityManager;
         List<Entity> entities = entityManager.getEntities();
+        grid = new Grid();
         grid.add(entities);                                     //puede tirar OccupedCellException
         entityManager.setGrid(grid);
     }

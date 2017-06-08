@@ -67,9 +67,6 @@ public class Light {
         if(entity == null) {
             return false;
         }
-        if(entity.getClass().equals(PlayerCharacter.class)) {
-            return true;
-        }
-        return false;
+        return entity.getClass().equals(PlayerCharacter.class);
     }
 }

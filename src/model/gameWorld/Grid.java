@@ -19,6 +19,12 @@ public class Grid {
         inicializeMatrix();
     }
 
+    public void add(Entity entity, Position destinatinon) throws OccupiedCellException {
+        int i = destinatinon.getX() / GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
+        int j = destinatinon.getY() / GameMap.CELL_SIZE;
+        matrix[i][j].add(entity);               //puede tirar exception
+    }
+
     public void add(Entity entity) throws OccupiedCellException {
         int i = entity.getPosition().getX() / GameMap.CELL_SIZE;
         int j = entity.getPosition().getY() / GameMap.CELL_SIZE;
@@ -30,7 +36,6 @@ public class Grid {
             add(entity);
         }
     }
-
 
     public Cell getCell(Position position) {
         Position positionGrid = position.toGridIndexes();

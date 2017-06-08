@@ -11,7 +11,7 @@ import model.gameWorld.Grid;
  */
 public abstract class GameCharacter extends DynamicEntity {
 
-    protected int movesRemaining;
+    private int movesRemaining;
     private Timer timer;
 
     protected GameCharacter(Position position, Direction direction, int velocity) {
@@ -28,9 +28,9 @@ public abstract class GameCharacter extends DynamicEntity {
     }
 
     public void tryToMove(Direction direction) {
-        if (state != IDLE || direction == null)
+        if (state != IDLE || direction == null) {
             return;
-
+        }
         if(!this.direction.equals(direction)) {
             rotate(direction);
             return;
@@ -43,13 +43,15 @@ public abstract class GameCharacter extends DynamicEntity {
         // Check destination is within the borders of the map, and its a valid
         // destination.
 
-        if (!destination.withinBoundaries() || !grid.isPossibleAdd(destination))
+        if (!destination.withinBoundaries() || !grid.isPossibleAdd(destination)) {
             return;
+        }
         state = MOVING;
         movesRemaining = GameMap.CELL_SIZE;
         timer.updateLastMoveTime(System.currentTimeMillis(), direction);
-        grid.add(this);
-        grid.freePosition(this.getPosition());
+
+        grid.freePosition(getPosition());
+        grid.add(this, destination);
     }
 
     protected void move() {

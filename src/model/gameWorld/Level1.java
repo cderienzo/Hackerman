@@ -13,7 +13,7 @@ public class Level1 {
     private final static int HEIGHT = 16;
 
     public Level1() {
-
+/*
         //13X16 MANDAR A ARCHIVO
         int[][] matrix = {
         {Obstacle.obstacleType.WALL, WALL, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, WALL, WALL, WALL, WALL},
@@ -51,6 +51,6 @@ public class Level1 {
         EntityManager = new EntityManager();
     }
 
-
+*/
     }
 }

@@ -66,11 +66,11 @@ public class Position implements Serializable {
             return false;
         }
         Position aux = (Position) obj;
-        if(aux.getX()==this.x && aux.getY()==this.y) {
-            return true;
-        }
-        return false;
+        return aux.getX() == this.x && aux.getY() == this.y;
     }
 
 
+    public boolean sameGridIndex(Position position) {
+        return this.toGridIndexes().equals(position.toGridIndexes());
+    }
 }

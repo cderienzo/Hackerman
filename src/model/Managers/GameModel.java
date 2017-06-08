@@ -11,10 +11,10 @@ import java.util.logging.Level;
  */
 public class GameModel {
 
-    private GameMap map;
+    private GameMap gameMap;
     private ComputerManager computerManager;
 
-    private boolean paused = false;
+    private boolean paused;
     private List<Level> levels;
     private int currentLevel;
 
@@ -24,33 +24,38 @@ public class GameModel {
 
     public GameModel() {
         levels = new ArrayList<Level>();
-        levels.add(new Level1());           //path con el level que quiero levantar
-        levels.add(new Level2());
-        levels.add(new Level3());
+        //levels.add(new Level1());           //path con el level que quiero levantar
+        //levels.add(new Level2());
+        //levels.add(new Level3());
         lives = MAX_LIVES;
-        currentLevel = 0;
+        setPaused();
+        currentLevel = -1;                     //model no inicializado
 
     }
 
     public void nextLevel() {
-        map = new GameMap(levels.get(currentLevel).createEntityManager());
-        computerManager = new ComputerManager(map.getEntityManager().getDoor(), map.getEntityManager().getComputers());
-        paused = false;
         currentLevel++;
+        gameMap = new GameMap(levels.get(currentLevel).createEntityManager());
+        computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
+        resume();
     }
 
-    public void setPaused(boolean paused) {
-        this.paused = paused;
+    public void setPaused() {
+        this.paused = true;
+    }
+
+    public void resume() {
+        this.paused = false;
     }
 
     public void tick() {
         if(!paused){
-            map.getEntityManager().tick();
+            gameMap.getEntityManager().tick();
             computerManager.updateComputers();
             if(playerCaught()) {
                 lives--;
                 if(gameOver()) {
-                    paused = true;                                //terminar
+                    setPaused();
                 }
                 else {
                     retryLevel();
@@ -64,12 +69,10 @@ public class GameModel {
     }
 
     public boolean passedLevel() {
-        return map.getEntityManager().getDoor().hasBeenPassed();
-    }
-
-    public void retryLevel() {
-        currentLevel--;
-        nextLevel();            //no aumento el currentLevel
+        if(currentLevel == -1) {       //no fue inicializado el gameModel
+            return false;
+        }
+        return gameMap.getEntityManager().getDoor().hasBeenPassed();
     }
 
     public int getLives() {
@@ -80,8 +83,20 @@ public class GameModel {
         return lives == 0;
     }
 
-    public boolean playerCaught() {
-        return map.getEntityManager().playerCaught();
+    public boolean hasNextLevel() {
+        return currentLevel < 3;        //cambiar por levels.size
     }
 
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
+    private boolean playerCaught() {
+        return gameMap.getEntityManager().playerCaught();
+    }
+
+    private void retryLevel() {
+        currentLevel--;
+        //nextLevel();            //no aumento el currentLevel
+    }
 }

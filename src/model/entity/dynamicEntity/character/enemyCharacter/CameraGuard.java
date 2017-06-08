@@ -4,6 +4,7 @@ import model.entity.Direction;
 import model.entity.Position;
 import model.gameWorld.Grid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static model.entity.Entity.IDLE;
@@ -30,7 +31,8 @@ public class CameraGuard extends EnemyCharacter {
 
     public CameraGuard(Position position, Direction direction, int range) {
         super(position, direction, 0, range);
-        instructions = null;
+        instructions = new ArrayList<Direction>();
+        instructions.add(new Direction(direction.getCode()));
         currentDirection = 0;
         playerDetected = false;
     }
@@ -62,6 +64,7 @@ public class CameraGuard extends EnemyCharacter {
             return;
         }
         if(getState() == IDLE) {
+            updateCurrentDirection();
             rotate(nextDirection());
             state = ROTATING;
             timeRotateRemaining = TIME_ROTATING;
@@ -70,20 +73,16 @@ public class CameraGuard extends EnemyCharacter {
         updateStatus();
     }
 
-    public Direction nextDirection() {
-        if(isCycle()) {
-            updateCurrentDirection();
-        }
-        else {
+    private Direction nextDirection() {
+        if(!isCycle()) {
             updateOrientation();
-            updateCurrentDirection();
         }
         return instructions.get(currentDirection);
     }
 
     private void updateCurrentDirection() {
         if(getPosition().equals(instructions.get(currentDirection))) {
-            currentDirection = (currentDirection + orientation) % instructions.size();
+            currentDirection =  Math.floorMod(currentDirection + orientation, instructions.size());
         }
     }
 
@@ -91,7 +90,7 @@ public class CameraGuard extends EnemyCharacter {
         if(getDirection().equals(instructions.get(0))) {               //si estoy en la primer direccion
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getDirection().equals(instructions.get(0))) {          //si estoy en la ultima posision
+        else if(getDirection().equals(instructions.get(instructions.size() - 1))) {          //si estoy en la ultima posision
             orientation = INVERSE_ORIENTATION;
         }
     }
@@ -103,7 +102,7 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     private boolean isCycle() {
-        return instructions.get(0).equals(instructions.get(instructions.size()));
+        return instructions.get(0).equals(instructions.get(instructions.size() - 1));
     }
 }
 

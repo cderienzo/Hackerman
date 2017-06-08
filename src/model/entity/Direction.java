@@ -1,6 +1,7 @@
 package model.entity;
 
 import javafx.geometry.Pos;
+import model.gameWorld.GameMap;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -35,10 +36,7 @@ public class Direction implements Serializable {
     }
 
     public Direction getLeft() {
-        if(code - 1 < 0) {
-            return new Direction(7);
-        }
-        return new Direction(code - 1);
+        return new Direction(Math.floorMod(code - 1, dir.length));
     }
 
     public int getCode(){
@@ -57,9 +55,10 @@ public class Direction implements Serializable {
     //esto es PI
     public static Direction directionBetween(Position p1, Position p2) {
         double[] dist = new double[8];
-        for (int i = 0; i < 7; i++) {
-            Position posAux = new Position(p1.getX() + dir[i][0], p1.getY() + dir[i][1]);
+        for (int i = 0; i < dist.length; i++) {
+            Position posAux = new Position(p1.getX() + dir[i][0] * GameMap.CELL_SIZE, p1.getY() + dir[i][1] * GameMap.CELL_SIZE);
             dist[i] = posAux.distanceOf(p2);
+            System.out.println("dist " + dist[i] + "code " + i);
         }
         int minDist = minDouble(dist);
         return new Direction(minDist);
@@ -77,6 +76,15 @@ public class Direction implements Serializable {
             }
         }
         return minIndex;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null || !getClass().equals(obj.getClass())) {
+            return false;
+        }
+        Direction aux = (Direction) obj;
+        return getCode() == aux.getCode();
     }
 
 }

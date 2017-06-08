@@ -4,6 +4,9 @@ import model.entity.Direction;
 import model.entity.Position;
 import model.gameWorld.Grid;
 
+import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static model.entity.Entity.IDLE;
@@ -23,7 +26,8 @@ public class Guard extends EnemyCharacter {
 
     public Guard(Position position, Direction direction, int velocity, int range) {
         super(position, direction, velocity, range);
-        instructions = null;
+        instructions = new ArrayList<Position>();
+        instructions.add(new Position(position.getX(), position.getY()));
         currentPosition = 0;
         playerDetected = false;
     }
@@ -47,12 +51,11 @@ public class Guard extends EnemyCharacter {
         if(getMylight().collision(position, direction, grid)) {
             playerDetected = true;
         }
-
         if(instructions == null) {
             return;
         }
-
         if(getState() == IDLE) {
+            updateCurrentPosition();
             Direction direction = nextDirection();
             tryToMove(direction);
         }
@@ -64,35 +67,31 @@ public class Guard extends EnemyCharacter {
         return playerDetected;
     }
 
-    public Direction nextDirection() {
-        if(isCycle()) {
-            updateCurrentPosition();
-        }
-        else {
+    private Direction nextDirection() {
+        if(!isCycle()) {
             updateOrientation();
-            updateCurrentPosition();
         }
         return Direction.directionBetween(getPosition(), instructions.get(currentPosition));
 
     }
 
     private void updateCurrentPosition() {
-        if(getPosition().equals(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
-            currentPosition = (currentPosition + orientation) % instructions.size();
+        if(getPosition().sameGridIndex(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
+            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());
         }
     }
 
     private void updateOrientation() {
-        if(getPosition().equals(instructions.get(0))) {               //si estoy en la primer direccion
+        if(getPosition().sameGridIndex(instructions.get(0))) {               //si estoy en la primer direccion
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getPosition().equals(instructions.get(instructions.size()))) {          //si estoy en la ultima posision
+        else if(getPosition().sameGridIndex(instructions.get(instructions.size() - 1))) {          //si estoy en la ultima posision
             orientation = INVERSE_ORIENTATION;
         }
     }
 
     private boolean isCycle() {
-        return instructions.get(0).equals(instructions.get(instructions.size()));
+        return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
     }
 }
 
