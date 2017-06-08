@@ -97,6 +97,6 @@ public class GameModel {
 
     private void retryLevel() {
         currentLevel--;
-        //nextLevel();            //no aumento el currentLevel
+        nextLevel();            //no aumento el currentLevel
     }
 }
