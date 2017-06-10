@@ -1,10 +1,10 @@
 package model.Managers;
 
 import model.gameWorld.GameMap;
+import model.gameWorld.Level;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Created by franciscosanguineti on 4/6/17.
@@ -23,10 +23,10 @@ public class GameModel {
 
 
     public GameModel() {
-        levels = new ArrayList<Level>();
-        //levels.add(new Level1());           //path con el level que quiero levantar
-        //levels.add(new Level2());
-        //levels.add(new Level3());
+        levels = new ArrayList<>();
+        levels.add(new Level("/src/Model/gameWorld/level1.txt"));           //path con el level que quiero levantar
+        levels.add(new Level("/src/Model/gameWorld/level2.txt"));
+        levels.add(new Level("/src/Model/gameWorld/level3.txt"));
         lives = MAX_LIVES;
         setPaused();
         currentLevel = -1;                     //model no inicializado
@@ -35,7 +35,7 @@ public class GameModel {
 
     public void nextLevel() {
         currentLevel++;
-        gameMap = new GameMap(levels.get(currentLevel).createEntityManager());
+        gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();
     }
