@@ -1,6 +1,8 @@
 package view;
 
-import Controller.ModelManager;
+import controller.ModelManager;
+import model.Managers.EntityManager;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -10,8 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class HackerGame extends Game {
 
     SpriteBatch batch;
-    private UIManager manager;
-    private ModelManager model;
+    private UIManager UIManager;
+    private ModelManager modelManager;
     private EntityManager entityManager;
 
     private MainMenuScreen mainMenuScreen;
@@ -21,10 +23,10 @@ public class HackerGame extends Game {
     private GameScreen gameScreen;
 
 
-    public HackerGame (UIManager manager, ModelManager model) {
-        this.manager = manager;
-        this.model = model;
-        this.entityManager = manager.getEntityManager();
+    public HackerGame (UIManager UIManager, ModelManager modelManager) {
+        this.UIManager = UIManager;
+        this.modelManager = modelManager;
+        this.entityManager = modelManager.getEntityManager();
         mainMenuScreen = new MainMenuScreen(this);
         exitScreen = new ExitScreen(this);
         pausedScreen = new PausedScreen(this);
@@ -55,6 +57,8 @@ public class HackerGame extends Game {
     public PausedScreen getPausedScreen() {
         return this.pausedScreen;
     }
+
+    public UIManager getUIManager() {return this.UIManager;}
 
 
 

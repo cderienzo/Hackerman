@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -63,8 +64,8 @@ public class ExitScreen implements Screen {
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
-                game.gameScreen.setState(GameScreen.STATE.PLAYING);
-                game.setScreen((Screen)game.getGameScreen());
+                this.dispose();
+                game.getUIManager().setState(Manager.STATE.RESUME);
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -74,8 +75,8 @@ public class ExitScreen implements Screen {
                 && Gdx.input.getY() > bottomY && Gdx.input.getY() < BOTTOM_Y) {
             game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
-                game.gameScreen.setState(GameScreen.STATE.EXIT_YES);
-                game.setScreen((Screen)game.getGameScreen());
+                this.dispose();
+                game.getUIManager().setState(Manager.STATE.EXIT_YES);
             }
         } else {
             game.batch.draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);

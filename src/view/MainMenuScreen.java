@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import controller.Manager;
 
 /**
  * Created by Bianca on 28/05/2017.
@@ -26,12 +27,12 @@ public class MainMenuScreen implements Screen {
     private static final int BUTTON_WIDTH = 219;
     private static final int BUTTON_HEIGHT = 73;
     private static final int CENTER_X = 318;
-    private static final int PLAY_Y = 375;
-    private static final int LOAD_Y = 475;
+    private static final int PLAY_Y = 475;
+    //private static final int LOAD_Y = 475;
     private static final int EXIT_Y = 575;
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int playY = PLAY_Y - BUTTON_HEIGHT;
-    private static final int loadY = LOAD_Y - BUTTON_HEIGHT;
+    //private static final int loadY = LOAD_Y - BUTTON_HEIGHT;
     private static final int exitY = EXIT_Y - BUTTON_HEIGHT;
 
     public MainMenuScreen(HackerGame game) {
@@ -39,8 +40,8 @@ public class MainMenuScreen implements Screen {
         this.game = game;
         playButtonInactive = new Texture("core/assets/playinactive.png");
         playButtonActive = new Texture("core/assets/playactive.png");
-        loadGameButtonActive = new Texture("core/assets/loadgameactive.png");
-        loadGameButtonInactive = new Texture("core/assets/loadgameinactive.png");
+        //loadGameButtonActive = new Texture("core/assets/loadgameactive.png");
+        //loadGameButtonInactive = new Texture("core/assets/loadgameinactive.png");
         exitButtonActive = new Texture("core/assets/exitactive.png");
         exitButtonInactive = new Texture("core/assets/exitinactive.png");
         hackermanTitle = new Texture ("core/assets/hackerman.png");
@@ -69,24 +70,23 @@ public class MainMenuScreen implements Screen {
             game.batch.draw(playButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.createGameScreen(this.game);
-                game.setScreen((Screen)game.getGameScreen());
+                game.getUIManager().setState(Manager.STATE.INITIALIZE);
             }
         } else {
             game.batch.draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
-        if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
+        /*if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > loadY && Gdx.input.getY() < LOAD_Y) {
             game.batch.draw(loadGameButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         } else {
             game.batch.draw(loadGameButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
-        }
+        }*/
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y) {
-            game.batch.draw(exitButtonActive, CENTER_X, 100, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                Gdx.app.exit();
+                game.getUIManager().setState(Manager.STATE.EXIT_YES);
             }
         } else {
             game.batch.draw(exitButtonInactive, CENTER_X, 100, BUTTON_WIDTH, BUTTON_HEIGHT);

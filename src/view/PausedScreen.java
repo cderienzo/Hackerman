@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -58,8 +59,8 @@ public class PausedScreen implements Screen {
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
-                game.gameScreen.setState(GameScreen.STATE.PLAYING);
-                game.setScreen((Screen) game.getGameScreen());
+                dispose();
+                game.getUIManager().setState(Manager.STATE.RESUME);
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
